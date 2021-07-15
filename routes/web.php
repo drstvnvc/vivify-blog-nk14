@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Models\Post;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,19 +14,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 |
 */
 
-Route::get('/', function () {
-    $posts = Post::where('is_published', true)->get(); // DB::select('select * from posts');
-
-    return view('posts', compact('posts'));
-});
-
-Route::get('/posts/{id}', function ($id) {
-    $post = Post::findOrFail($id); // DB::select('select * from posts where id=$id limit 1');
-    if (!$post->is_published) {
-        throw new ModelNotFoundException();
-    }
-    return view('post', compact('post'));
-});
+Route::get('/', [PostController::class, 'index']);
+Route::get('/posts/{post}', [PostController::class, 'show']);
 
 
 // class QueryBuilder
