@@ -18,15 +18,15 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 */
 
 Route::get('/', function () {
-    $posts = Post::all(); // DB::select('select * from posts');
+    $posts = Post::where('is_published', true)->get(); // DB::select('select * from posts');
 
     return view('posts', compact('posts'));
 });
 
 Route::get('/posts/{id}', function ($id) {
     $post = Post::findOrFail($id); // DB::select('select * from posts where id=$id limit 1');
-    // if (!$post) {
-    //     throw new ModelNotFoundException();
-    // }
+    if (!$post->is_published) {
+        throw new ModelNotFoundException();
+    }
     return view('post', compact('post'));
 });
