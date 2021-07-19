@@ -410,7 +410,7 @@
 <body class="antialiased">
     @include('layouts.navbar')
 
-    <div style="border: 1px solid gray">
+    <div class="container">
         @yield('content')
     </div>
 </body>

@@ -18,7 +18,7 @@ class PostController extends Controller
         $posts = Post::where('is_published', true)->get();
         // DB::select('select * from posts');
 
-        return view('posts', compact('posts'));
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -28,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -39,7 +39,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -55,7 +54,7 @@ class PostController extends Controller
         if (!$post->is_published) {
             throw new ModelNotFoundException();
         }
-        return view('post', compact('post'));
+        return view('posts.show', compact('post'));
     }
 
     /**
