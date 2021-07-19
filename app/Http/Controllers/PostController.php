@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+
 class PostController extends Controller
 {
     /**
@@ -16,7 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('is_published', true)->get();
+        $posts = Post::with('comments')
+            ->where('is_published', true)
+            ->get();
         // DB::select('select * from posts');
 
         return view('posts.index', compact('posts'));
