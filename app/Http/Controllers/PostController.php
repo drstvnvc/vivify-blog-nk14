@@ -39,6 +39,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $newPost = new Post;
+        $newPost->title = $request->get('title');
+        $newPost->body = $request->get('body');
+        $newPost->is_published = $request->get('is_published', 'false');
+
+        $newPost->save();
+
+        return redirect('/');
     }
 
     /**
