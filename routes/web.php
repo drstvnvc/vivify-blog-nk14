@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
@@ -21,6 +22,7 @@ Route::post('/posts', [PostController::class, 'store']);
 
 Route::get('/posts/{post}', [PostController::class, 'show']);
 
+Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
 
 // class QueryBuilder
 // {

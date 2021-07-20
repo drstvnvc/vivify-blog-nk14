@@ -12,4 +12,13 @@
 <div>{{$comment->body}}</div>
 @endforeach
 
+
+<form method="POST" action="/posts/{{$post->id}}/comments">
+    @csrf
+    <div class="form-group">
+        <label for="body">Comment</label>
+        <textarea name="body" class="form-control" id="body" rows="3" placeholder="Write your comment here..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 @endsection
