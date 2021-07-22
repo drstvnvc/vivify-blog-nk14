@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,20 +19,29 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', [PostController::class, 'index']);
 
-Route::get('/posts/create', [PostController::class, 'create']);
-Route::post('/posts', [PostController::class, 'store']);
+// rute za ulogovanog korisnika
+Route::group([
+    'middleware' => 'auth'
+], function () {
+    Route::get('/posts/create', [PostController::class, 'create']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+// rute za goste
+Route::group([
+    'middleware' => 'guest'
+], function () {
+    Route::get('/register', [AuthController::class, 'getRegisterForm']);
+    Route::post('/register', [AuthController::class, 'register']);
+
+    Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+});
 
 Route::get('/posts/{post}', [PostController::class, 'show']);
 
-Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
-
-Route::get('/register', [AuthController::class, 'getRegisterForm']);
-Route::post('/register', [AuthController::class, 'register']);
-
-Route::get('/login', [AuthController::class, 'getLoginForm']);
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::post('/logout', [AuthController::class, 'logout']);
 // class QueryBuilder
 // {
 //     private $fields = '*';
