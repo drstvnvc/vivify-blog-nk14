@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
+
 class PostController extends Controller
 {
     /**
@@ -17,7 +18,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('comments')
+        \DB::listen(function ($query) {
+            info($query->sql);
+        });
+        $posts = Post::with('comments', 'user')
             ->where('is_published', true)
             ->get();
         // DB::select('select * from posts');
@@ -44,7 +48,9 @@ class PostController extends Controller
     public function store(CreatePostRequest $request)
     {
         $data = $request->validated();
-        Post::create($data);
+        auth()->user()->posts()->create($data);
+        // User::find($idUlogovanogUseraIzSesije)->posts()->create(...);
+
         return redirect('/');
     }
 

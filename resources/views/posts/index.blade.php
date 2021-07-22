@@ -9,7 +9,7 @@
     @foreach($posts as $post)
     <li>
         <a href="{{ route('posts.show', [ 'post' => $post ]) }}">
-            {{$post->title}} ({{$post->comments->count()}})
+            {{$post->title}} - {{$post->user->name}} ({{$post->comments->count()}})
         </a>
     </li>
     @endforeach
