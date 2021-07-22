@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,13 @@ Route::get('/posts/{post}', [PostController::class, 'show']);
 
 Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
 
+Route::get('/register', [AuthController::class, 'getRegisterForm']);
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/login', [AuthController::class, 'getLoginForm']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout']);
 // class QueryBuilder
 // {
 //     private $fields = '*';
