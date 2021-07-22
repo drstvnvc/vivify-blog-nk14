@@ -25,7 +25,7 @@ Route::group([
 ], function () {
     Route::get('/posts/create', [PostController::class, 'create']);
     Route::post('/posts', [PostController::class, 'store']);
-    Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('post.comment');
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
@@ -40,7 +40,7 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::get('/posts/{post}', [PostController::class, 'show']);
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 // class QueryBuilder
 // {

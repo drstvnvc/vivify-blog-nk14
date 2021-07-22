@@ -12,8 +12,8 @@
 <div>{{$comment->body}}</div>
 @endforeach
 
-
-<form method="POST" action="/posts/{{$post->id}}/comments">
+@auth
+<form method="POST" action="{{route('post.comment', ['post'=>$post])}}">
     @csrf
     <div class="form-group">
         <label for="body">Comment</label>
@@ -21,4 +21,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+@endauth
 @endsection
