@@ -411,6 +411,12 @@
 <body class="antialiased">
     @include('layouts.navbar')
 
+    @if(session('post_created_successfully'))
+    <p id="success-alert" class="alert alert-success">You have successfully created a post</p>
+    @endif
+    <p>Request count: {{ session('request_count', 0) }}</p>
+
+
     <div class="container">
         @yield('content')
     </div>

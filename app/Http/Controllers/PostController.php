@@ -51,6 +51,7 @@ class PostController extends Controller
         auth()->user()->posts()->create($data);
         // User::find($idUlogovanogUseraIzSesije)->posts()->create(...);
 
+        session()->flash('post_created_successfully', true);
         return redirect('/');
     }
 
