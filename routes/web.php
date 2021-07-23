@@ -22,10 +22,13 @@ use App\Http\Controllers\UserController;
 Route::group([
     'middleware' => 'auth'
 ], function () {
-    Route::get('/posts/create', [PostController::class, 'create']);
+    Route::get('/posts/create', [PostController::class, 'create'])->middleware('verified');
     Route::post('/posts', [PostController::class, 'store']);
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('post.comment');
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/email/verify', [AuthController::class, 'getEmailVerificationNotice'])->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
 });
 
 // rute za goste
@@ -42,6 +45,7 @@ Route::group([
 Route::get('/', [PostController::class, 'index']);
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+
 
 // class QueryBuilder
 // {
