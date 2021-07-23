@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,6 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [PostController::class, 'index']);
 
 // rute za ulogovanog korisnika
 Route::group([
@@ -40,7 +39,9 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
 });
 
+Route::get('/', [PostController::class, 'index']);
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
 // class QueryBuilder
 // {
