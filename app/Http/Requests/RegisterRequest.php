@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\DateAfterOtherFieldRule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\OverEighteenAgeRule;
 
 class RegisterRequest extends FormRequest
 {
@@ -28,6 +30,12 @@ class RegisterRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|confirmed',
             // 'password_confirmation' => 'required|same:password',
+            'date_of_birth' => ['required', 'date', new OverEighteenAgeRule],
+            'later_than_date_of_birth' => [
+                'required',
+                'date',
+                new DateAfterOtherFieldRule('', $this->get('date_of_birth'))
+            ],
             'agreed' => 'required'
         ];
     }

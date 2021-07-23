@@ -25,6 +25,18 @@
         <input type="password" name="password_confirmation" class="form-control" id="confirm-password" placeholder="Confirm password">
         @include('partials.error-message', ['field' => 'password_confirmation'])
     </div>
+
+    <div class="form-group">
+        <label for="date-of-birth">Date of birth</label>
+        <input type="date" name="date_of_birth" class="form-control" id="date-of-birth" placeholder="Date of birth">
+        @include('partials.error-message', ['field' => 'date_of_birth'])
+    </div>
+    <div class="form-group">
+        <label for="date-of-birth">Date of birth</label>
+        <input type="date" name="later_than_date_of_birth" class="form-control" id="date-of-birth" placeholder="Date of birth">
+        @include('partials.error-message', ['field' => 'later_than_date_of_birth'])
+    </div>
+
     <div class="form-check">
         <input type="checkbox" name="agreed" class="form-check-input" id="agreed" value="1">
         <label class="form-check-label" for="agreed">I agree to terms and conditions.</label>
