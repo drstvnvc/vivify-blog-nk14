@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -23,7 +24,7 @@ class PostController extends Controller
         //     info($query->sql);
         // });
 
-        $posts = Post::with(['comments', 'user'])
+        $posts = Post::with(['comments', 'user', 'tags'])
             ->where('is_published', true)
             ->paginate(10);
 
@@ -40,7 +41,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all();
+        return view('posts.create', compact('tags'));
     }
 
     /**
@@ -52,11 +54,13 @@ class PostController extends Controller
     public function store(CreatePostRequest $request)
     {
         $data = $request->validated();
-        auth()->user()->posts()->create($data);
+
+        $post = auth()->user()->posts()->create($data);
         // User::find($idUlogovanogUseraIzSesije)->posts()->create(...);
 
+        $post->tags()->attach($data['tags']);
         session()->flash('post_created_successfully', true);
-        return redirect('/');
+        return redirect(route('posts.show', ['post'=>$post]));
     }
 
     /**

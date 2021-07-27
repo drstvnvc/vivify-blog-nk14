@@ -4,6 +4,17 @@
 
 @section('content')
 <h1>{{$post->title }}</h1>
+<h4><a href="/users/{{$post->user->id}}">{{$post->user->name }}</a></h4>
+
+<div>
+@foreach($post->tags as $tag)
+<span style="background-color: #{{$tag->color}}; border-radius: 10px; padding: 0px 10px"> 
+    {{$tag->name}}
+</span> 
+@endforeach
+</div>
+
+<hr />
 <p>{{$post->body}}</p>
 <hr />
 
