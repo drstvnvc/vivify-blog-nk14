@@ -31,11 +31,6 @@
         <input type="date" name="date_of_birth" class="form-control" id="date-of-birth" placeholder="Date of birth">
         @include('partials.error-message', ['field' => 'date_of_birth'])
     </div>
-    <div class="form-group">
-        <label for="date-of-birth">Date of birth</label>
-        <input type="date" name="later_than_date_of_birth" class="form-control" id="date-of-birth" placeholder="Date of birth">
-        @include('partials.error-message', ['field' => 'later_than_date_of_birth'])
-    </div>
 
     <div class="form-check">
         <input type="checkbox" name="agreed" class="form-check-input" id="agreed" value="1">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterPostsTableAddUserIdColumn extends Migration
+class AlterCommentsTableAddUserIdColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AlterPostsTableAddUserIdColumn extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('comments', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
@@ -25,7 +25,7 @@ class AlterPostsTableAddUserIdColumn extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('comments', function (Blueprint $table) {
             $table->dropConstrainedForeignId('user_id');
         });
     }

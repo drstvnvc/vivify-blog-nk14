@@ -31,11 +31,6 @@ class RegisterRequest extends FormRequest
             'password' => 'required|string|min:6|confirmed',
             // 'password_confirmation' => 'required|same:password',
             'date_of_birth' => ['required', 'date', new OverEighteenAgeRule],
-            'later_than_date_of_birth' => [
-                'required',
-                'date',
-                new DateAfterOtherFieldRule('', $this->get('date_of_birth'))
-            ],
             'agreed' => 'required'
         ];
     }
