@@ -9,7 +9,7 @@
     @foreach($posts as $post)
     <li>
         <a href="{{ route('posts.show', [ 'post' => $post ]) }}">
-            {{$post->title}} ({{$post->comments->count()}})
+            {{$post->id}} {{$post->title}} ({{$post->comments->count()}})
         </a>
         -
         <a href="{{ route('users.show', [ 'user' => $post->user ]) }}">
@@ -18,4 +18,8 @@
     </li>
     @endforeach
 </ul>
+
+<div>
+{{ $posts->links() }}
+</div>
 @endsection

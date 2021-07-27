@@ -16,14 +16,17 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        \DB::listen(function ($query) {
-            info($query->sql);
-        });
+        // \DB::listen(function ($query) {
+        //     info($query->sql);
+        // });
+
         $posts = Post::with('comments', 'user')
             ->where('is_published', true)
-            ->get();
+            ->paginate(10);
+
+
         // DB::select('select * from posts');
 
         return view('posts.index', compact('posts'));
