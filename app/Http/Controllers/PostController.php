@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -22,7 +23,7 @@ class PostController extends Controller
         //     info($query->sql);
         // });
 
-        $posts = Post::with('comments', 'user')
+        $posts = Post::with(['comments', 'user'])
             ->where('is_published', true)
             ->paginate(10);
 
@@ -66,7 +67,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        // DB::select('select * from posts where id=$id limit 1');
+        \DB::listen(function ($query) {
+            info($query->sql);
+        });
+        $post->load(['comments.user'=> function($qb){
+            return $qb->select(['users.id', 'users.name']);
+        }]);
 
         if (!$post->is_published) {
             throw new ModelNotFoundException();

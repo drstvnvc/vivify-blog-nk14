@@ -9,7 +9,12 @@
 
 <h3>Comments:</h3>
 @foreach($post->comments as $comment)
-<div>{{$comment->body}}</div>
+<div>
+    <h4><a href="/users/{{$comment->user->id}}">{{$comment->user->id}} {{$comment->user->name}}</a></h4>
+    <blockquote>
+        {{$comment->body}}
+    </blockquote>
+</div>
 @endforeach
 
 @auth
