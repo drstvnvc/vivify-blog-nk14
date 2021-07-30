@@ -23,10 +23,19 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(),
+            'title' => $this->faker->text(),
             'body' => $this->faker->text(500),
             'is_published' => $this->faker->boolean(70),
             // 'user_id' => User::inRandomOrder()->first()->id
         ];
+    }
+
+    public function published()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_published' => true,
+            ];
+        });
     }
 }

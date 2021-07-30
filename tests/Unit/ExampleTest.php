@@ -15,4 +15,12 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function test_asdfas() {
+        // priprema testa - priprema podataka za autentifikaciju, request body, sesiju itd...
+        // izvršavanje funkcionalnosti koju testiramo i hvatanje rezultata
+        $result = true;
+        // tvrdnje da je rezultat onakav kakav očekujemo
+        $this->assertTrue($result);
+    }
 }
