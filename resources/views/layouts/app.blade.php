@@ -420,6 +420,16 @@
     <div class="container">
         @yield('content')
     </div>
+
+    <div>
+        Tags:
+        <ul>
+
+            @foreach($tags as $tag)
+            <li>{{$tag->name}}</li>
+            @endforeach
+            </ul>
+        </div>
 </body>
 
 </html>

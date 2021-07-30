@@ -8,8 +8,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -20,6 +19,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        info('posts controller :: index');
         // \DB::listen(function ($query) {
         //     info($query->sql);
         // });
@@ -27,7 +27,6 @@ class PostController extends Controller
         $posts = Post::with(['comments', 'user', 'tags'])
             ->where('is_published', true)
             ->paginate(10);
-
 
         // DB::select('select * from posts');
 
@@ -41,8 +40,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $tags = Tag::all();
-        return view('posts.create', compact('tags'));
+        return view('posts.create');
     }
 
     /**
