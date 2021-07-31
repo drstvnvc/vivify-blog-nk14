@@ -69,6 +69,7 @@ class PostsTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertHeader('location', route('posts.show', ['post' => $post]));
+
         $response->assertSessionHas('post_created_successfully', true);
 
         $this->assertDatabaseHas('posts', [
@@ -85,5 +86,19 @@ class PostsTest extends TestCase
             'post_id' => $post->id,
             'tag_id' => 2
         ]);
+    }
+
+    public function test_post_post_route()
+    {
+        // create post
+        // $this->get('/post/$post->id)
+        // TODO assert
+    }
+
+    public function test_post_show_view()
+    {
+        // create post
+        // $this->view('posts.show', [ 'show' => $show]);
+        // TODO assert
     }
 }
